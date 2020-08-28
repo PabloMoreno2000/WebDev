@@ -1,0 +1,104 @@
+html {
+  /* Search the fonts on the user's app*/
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  /*Originally horizontal container*/
+  display: flex;
+  background-color: black;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/*Just divs inside nav*/
+nav div {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+nav a {
+  /*Remove underline of links*/
+  text-decoration: none;
+}
+
+/*Como se ve el elemento cuando pases el mouse encima*/
+.elemento:hover {
+  background-color: blue;
+}
+
+.logo {
+  background: transparent;
+  /* Takes all the available space. It can be distributed
+  with items with this property depending the value.*/
+  flex-grow: 1;
+}
+.logo img {
+  height: 50px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /*100% vertically*/
+  min-height: 100vh;
+  margin: 0px;
+}
+.cuerpo {
+  display: flex;
+  justify-content: space-evenly;
+  /*Para que se ocupe todo el espacio*/
+  flex-grow: 1;
+}
+
+.cuerpo div {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.footer {
+  background-color: black;
+  text-align: center;
+  color: white;
+  padding: 15px;
+}
+
+.claro body {
+  background-color: white;
+}
+.oscuro body {
+  background-color: #222222;
+  /*important para que otro no lo sobreescriba*/
+  color: white !important;
+}
+.selector {
+  margin: 10px;
+  text-align: right;
+  /*Se pone un pointer a hover*/
+  cursor: pointer;
+}
+.oscuro .ligaoscuro {
+  text-decoration: underline;
+}
+.claro .ligaclaro {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  /*This applies if the screen is less than 900px*/
+  .cuerpo {
+    flex-direction: column;
+  }
+}
+
+/*
+.img {
+  width: 100%;
+  max-width: 300px;
+  min-width: 20px;
+}
+*/

@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html id="tema" class="claro">
   <head>
     <title>Our Site</title>
+    <!--Helps for better look on mobile-->
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <!--Nav of navigation menu-->
     <nav>
       <div class="logo"><img src="img/logo.png" /></div>
-      <a href="#"><div>Home</div></a>
-      <a href="#"><div>About us</div></a>
-      <a href="#"><div>Services</div></a>
-      <a href="#"><div>Contact</div></a>
+      <a href="#"><div class="elemento">Home</div></a>
+      <a href="#"><div class="elemento">About us</div></a>
+      <a href="#"><div class="elemento">Services</div></a>
+      <a href="#"><div class="elemento">Contact</div></a>
     </nav>
+    <div class="selector">
+      <a onclick="myFunctionClaro()" class="ligaclaro">Claro</a> |
+      <a onclick="myFunctionOscuro()" class="ligaoscuro">Oscuro</a>
+    </div>
     <div class="cuerpo">
       <div>
         <h2>Column 1</h2>
-        <img src="img/imagen1.jpg" />
+        <img src="img/imagen1.jpg" style="width: 100%" />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -56,5 +66,18 @@
     <div class="footer">
       <p>Copyright 2020 All Rights Reserved</p>
     </div>
+
+    <script type="text/javascript">
+      function myFunctionOscuro() {
+        var element = document.getElementById("tema");
+        element.classList.remove("claro");
+        element.classList.add("oscuro");
+      }
+      function myFunctionClaro() {
+        var element = document.getElementById("tema");
+        element.classList.remove("oscuro");
+        element.classList.add("claro");
+      }
+    </script>
   </body>
 </html>
