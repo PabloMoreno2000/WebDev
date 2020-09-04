@@ -70,3 +70,13 @@ let item_creator = (template_creator) => {
 // el atributo onClick al botón en htmls
 let event_handler = item_creator(get_li_template);
 document.getElementById("add-item").addEventListener("click", event_handler);
+
+let basic_operations = {
+  add: (a, b) => {
+    return a + b;
+  },
+  times: (a, b) => {
+    return a * b;
+  },
+};
+console.log(basic_operations["add"](3, 100));

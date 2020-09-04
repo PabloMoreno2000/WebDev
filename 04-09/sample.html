@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        let container_childs = document.querySelector("#container").childNodes;
+        let items = document.getElementById("items");
+        console.log(items);
+        console.log("in the html");
+      });
+    </script>
+    <script>
+      console.log("nice");
+      var my_fist_var = 10;
+      var my_fist_var = 10.1;
+      var my_fist_var = "hello";
+      let my_second_var = 1.1;
+      last_var = 10;
+    </script>
+    <script src="./sample.js"></script>
+    <style>
+      .red {
+        border-style: solid;
+        border-color: red;
+      }
+      .blue {
+        border-color: blue;
+        border-style: solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="non-color">
+      item: <input type="text" id="items" /> price:
+      <input type="text" id="price" />
+      <button id="add-item">add</button>
+    </div>
+    <ul id="list-items">
+      <button id="button-red">change to red</button>
+      <button id="button-blue">change to blue</button>
+    </ul>
+    <!-- <script src="../js_samples/ajax_sample.js"></script> -->
+  </body>
+</html>
