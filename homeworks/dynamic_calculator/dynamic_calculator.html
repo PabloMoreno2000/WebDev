@@ -4,16 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>lab items list</title>
-    <script src="./utils.js"></script>
-    <script>
-      // DOMContentLoaded wait until all dom is loaded, check the docs in below link
-      // https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-      document.addEventListener("DOMContentLoaded", (_) => {
-        let item_name = document.querySelector("#item-name");
-        let item_value = document.querySelector("#item-value");
-        // use here what you have in utils.js
-      });
-    </script>
+    <script src="./dynamic_calculator.js"></script>
   </head>
   <body>
     <div id="container">
@@ -21,7 +12,7 @@
       <input type="text" id="item-value" />
       <button id="add-item">add</button>
     </div>
-    <ul class="items"></ul>
+    <ul class="items" id="item_list"></ul>
     <div id="total"></div>
   </body>
 </html>
