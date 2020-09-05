@@ -7,10 +7,14 @@ function get_element_li(name, price) {
 
 let add_item_to_list_with_template = (template_function) => {
   return (event) => {
+    let color = "";
     // add the item to the list
-    const item_name = document.getElementById("item-name").value;
-    const item_value = parseFloat(document.getElementById("item-value").value);
-    if (item_value != NaN) {
+    const item_name = document.getElementById("item-name").value.trim();
+    const item_value = parseFloat(
+      document.getElementById("item-value").value.trim()
+    );
+    if (!isNaN(item_value) && item_name != "") {
+      color = "white";
       const new_item_element = template_function(item_name, item_value);
       document.getElementById(item_list).innerHTML += new_item_element;
 
@@ -26,7 +30,11 @@ let add_item_to_list_with_template = (template_function) => {
       // Add the value to the total
       total += item_value;
       document.getElementById("total").innerHTML = `Total: ${total}`;
+    } else {
+      color = "red";
     }
+    // Add border color depending on successful or failed list addition
+    document.getElementById("container").style.border = `thick solid ${color}`;
   };
 };
 /*
