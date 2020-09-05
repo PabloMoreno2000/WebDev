@@ -37,17 +37,23 @@ let add_item_to_list_with_template = (template_function) => {
     https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
   */
 
+// node_to_remove is a <li> element
 let remove_item = (node_to_remove) => {
   const list_of_items = document.getElementById(item_list);
+  // The first item of each appended <li> element, is a span that has just the number
   const span_price = node_to_remove.children[0].innerHTML;
   const removed_value = parseFloat(span_price);
+  // Subtract the value of the removed item and update
   total -= removed_value;
   document.getElementById("total").innerHTML = `Total: ${total}`;
   list_of_items.removeChild(node_to_remove);
 };
 
+// When the DOM is loaded
 document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById("total").innerHTML = "Total: 0";
+  // Create a function by currification
   const event_handler = add_item_to_list_with_template(get_element_li);
+  // Add an element each time the "add" button is clicked
   document.getElementById("add-item").addEventListener("click", event_handler);
 });
