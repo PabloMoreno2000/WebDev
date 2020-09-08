@@ -174,8 +174,47 @@ while (sentinel) {
 sentinel = 10;
 if (sentinel == "10") {
   console.log("inside the if ==");
+  // Checks data type
 } else if (sentinel === 10) {
   console.log("inside the ===");
 } else {
   console.log("in the else");
 }
+
+// When a case is true, executes the other cases without checking
+switch ("one") {
+  case "one":
+    console.log("one");
+    break;
+  case "two":
+    console.log("two");
+    break;
+  default:
+    console.log("default");
+}
+
+// functions are objects, you can assign properties to them.
+// but in an arrow function "this" has its father properties.
+function Dog() {
+  this.talk = () => {
+    console.log("talk in dog");
+  };
+}
+
+function Duck() {
+  this.talk = () => {
+    console.log("talk in duck");
+  };
+}
+
+// Creates a new function with its properties
+animal = new Duck();
+
+function executeTalk(animal) {
+  console.log(animal);
+  animal.talk();
+  // Check if the property exists, if it does it gets executed
+  animal.thisfunctionisfake?.();
+}
+
+executeTalk(animal);
