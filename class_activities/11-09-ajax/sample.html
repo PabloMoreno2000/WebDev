@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      div.bubble-sample * {
+        margin: 10px;
+        border: 1px solid blue;
+      }
+    </style>
+    <script type="module" src="./ajax_sample.js"></script>
+    <script type="module" src="./main.js">
+    </script>
+    <script type="module">
+      import {
+        append_event_to_dom_element,   
+        get_element_of_dog_string,
+        get_element_of_dog_node,
+        events_action_map
+      } from './main.js'
+      document.addEventListener("DOMContentLoaded", (_) => {
+        console.log(Window.append_event_to_dom_element)
+        console.log(window.append_event_to_dom_element)
+        append_event_to_dom_element("click", document.getElementsByClassName("bubble-form"));
+        append_event_to_dom_element("click", document.getElementsByClassName("bubble-div"));
+        append_event_to_dom_element("click", document.getElementsByClassName("bubble-p"));
+        document.getElementById("dogos").innerHTML = get_element_of_dog_string("baldo");
+        //document.getElementById("dogos").appendChild(get_element_of_dog_string("baldo"));
+        document.getElementById("dogos").appendChild(get_element_of_dog_node("moka"));
+        let element_to_hide = document.querySelector("#dogos").firstElementChild;
+        element_to_hide.style.display = "none";
+        let element_to_delete = document.querySelector("#dogos").lastElementChild;
+        element_to_delete.parentNode.removeChild(element_to_delete);
+        document.getElementById("dogos").prepend(get_element_of_dog_node("baloo"));
+        // document.querySelector(".bubble-p") will get first element found
+        document.querySelectorAll(".bubble-p")[1].removeEventListener("click", events_action_map["click"]);
+        let sample_p_value_text = document.querySelector(".sample-div").querySelector(".inner-sample-div").innerText;
+        let sample_p_value_html = document.querySelector(".sample-div").querySelector(".inner-sample-div").innerHTML;
+        console.log(`the sample p value is : ${sample_p_value_text}`);
+        console.log(`the sample p html is : ${sample_p_value_html}`);
+        document.getElementById("email").addEventListener("keyup", events_action_map["key_up"]);
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("pass").value;
+        //document.getElementsByName("radio")[0].checked
+        // let selectedRadio = document.querySelectorAll("input[name=radio]:checked")[0]
+        let selectedRadio = document.querySelectorAll("input[name=radio]:checked")[0];
+        let selectedCheckBoxes = document.querySelectorAll("input[type=checkbox]:checked");
+
+      });
+      // document.addEventListener("DOMContentLoaded", (_) => {
+      //   console.log("hola")
+      // });
+      // document.addEventListener("DOMContentLoaded", (_) => {
+      //   console.log("hola2")
+      // });
+    </script>
+  </head>
+  <body>
+    <div class="bubble-sample">
+      <form class="bubble-form">FORM
+        <div class="bubble-div">DIV
+          <p class="bubble-p">P1</p>
+          <p class="bubble-p">P2</p>
+        </div>
+      </form>
+    </div>
+    <p class="bubble-p">P3</p>
+    <div class="sample-div">
+      <div class="inner-sample-div"> 
+        <p>blabla</p>
+      </div>
+    </div>
+    <form>
+      <p>email:<input type="email" name="email" id="email"></p>
+      <p>password:<input type="password" name="password" id="pass"></p>
+      <p>radio-one:<input type="radio" name="radio" id="radio-one" value="radio-one"></p>
+      <p>radio-two:<input type="radio" name="radio" id="radio-two" value="radio-two"></p>
+      <p>check-one:<input type="checkbox" name="check-one" id="check-one" value="check-one"></p>
+      <p>check-two<input type="checkbox" name="check-two" id="check-two" value="check-two"></p>
+      <p><input type="button" value="submit"></p>
+    </form>
+    <ul id="dogos"></ul>
+  </body>
+</html>
