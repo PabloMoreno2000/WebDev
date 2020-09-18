@@ -1,3 +1,24 @@
+let get_pokemon_promise = (pokemonName) => {
+  return new Promise((resolve, reject) => {
+    let req = new XMLHttpRequest();
+    req.open("GET", `https://pokeapi.co/api/v2/pokemon/${pokemonName}`, true);
+    // Gets executed when readyState changes even if it is not a 4 state
+    req.onreadystatechange = (req_event) => {
+      console.log("inside the event handler of the request");
+      // If request finished / received the answer
+      if (req.readyState == 4) {
+        // If it finished fine
+        if (req.status == 200) {
+          return resolve(req.response);
+        } else {
+          return reject(req.reject);
+        }
+      }
+    };
+    req.send(null);
+  });
+};
+
 let get_pokemon_card = (name, weight, photo) => {
   let li = document.createElement("li");
   li.className = "list-group-item pokemon";
@@ -41,25 +62,6 @@ let get_pokemon_card = (name, weight, photo) => {
 };
 
 function insert_pokemon_element_with_template(pokemonName, template_function) {
-  let pokemon_ajax_promise = new Promise((resolve, reject) => {
-    let req = new XMLHttpRequest();
-    req.open("GET", `https://pokeapi.co/api/v2/pokemon/${pokemonName}`, true);
-    // Gets executed when readyState changes even if it is not a 4 state
-    req.onreadystatechange = (req_event) => {
-      console.log("inside the event handler of the request");
-      // If request finished / received the answer
-      if (req.readyState == 4) {
-        // If it finished fine
-        if (req.status == 200) {
-          return resolve(req.response);
-        } else {
-          return reject(req.reject);
-        }
-      }
-    };
-    req.send(null);
-  });
-
   let promise_thenable = (result) => {
     result = JSON.parse(result);
     let weight = result.weight;
@@ -69,7 +71,9 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
     return result;
   };
 
-  pokemon_ajax_promise.then(promise_thenable).catch((err) => {
-    return err;
-  });
+  get_pokemon_promise(pokemonName)
+    .then(promise_thenable)
+    .catch((err) => {
+      return err;
+    });
 }
