@@ -86,6 +86,25 @@ let get_pokemon_card = (name, weight, photo) => {
   return card;
 };
 
+function show_timed_alert(isSuccess, duration) {
+  let alarm_div = document.getElementById("alarm-space");
+  let alarm = NaN;
+  let alarm_id = "alarm";
+
+  if (isSuccess) {
+    alarm = `<div id="${alarm_id}" class="alert alert-success" role="alert"> <strong>Bien!</strong> Pokemon agregado</div>`;
+  } else {
+    alarm = `<div id="${alarm_id}" class="alert alert-warning" role="alert"> Favor de checar el nombre del pokemon e intentar de nuevo</div>`;
+  }
+
+  alarm_div.insertAdjacentHTML("beforeend", alarm);
+  setTimeout(() => {
+    while (alarm_div.firstChild) {
+      alarm_div.removeChild(alarm_div.firstChild);
+    }
+  }, duration);
+}
+
 function insert_pokemon_element_with_template(pokemonName, template_function) {
   let promise_thenable = (result) => {
     document.getElementById(pokemon_list).style.visibility = "visible";
@@ -95,12 +114,14 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
     let cardNode = template_function(pokemonName, weight, sprite);
     document.getElementById(pokemon_list).append(cardNode);
     pokemon_count++;
+    show_timed_alert(true, 1500);
     return result;
   };
 
   get_pokemon_promise(pokemonName)
     .then(promise_thenable)
     .catch((err) => {
+      show_timed_alert(false, 1500);
       return err;
     });
 }
