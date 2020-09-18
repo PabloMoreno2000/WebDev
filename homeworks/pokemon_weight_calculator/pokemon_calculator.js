@@ -131,7 +131,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById("total").innerHTML = "Total weight: 0";
 
   document.getElementById(add_pokemon).addEventListener("click", (event) => {
-    pokeName = document.getElementById(pokemon_input).value.trim();
+    pokeName = document
+      .getElementById(pokemon_input)
+      .value.trim()
+      .toLowerCase();
     insert_pokemon_element_with_template(pokeName, get_pokemon_card);
   });
 });
