@@ -1,3 +1,7 @@
+const pokemon_list = "item_list";
+const add_pokemon = "add-pokemon";
+const pokemon_input = "pokemon-input";
+
 let get_pokemon_promise = (pokemonName) => {
   return new Promise((resolve, reject) => {
     let req = new XMLHttpRequest();
@@ -63,11 +67,12 @@ let get_pokemon_card = (name, weight, photo) => {
 
 function insert_pokemon_element_with_template(pokemonName, template_function) {
   let promise_thenable = (result) => {
+    document.getElementById(pokemon_list).style.visibility = "visible";
     result = JSON.parse(result);
     let weight = result.weight;
     let sprite = result.sprites.front_default;
     let cardNode = template_function(pokemonName, weight, sprite);
-    document.getElementById("item_list").append(cardNode);
+    document.getElementById(pokemon_list).append(cardNode);
     return result;
   };
 
@@ -77,3 +82,13 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
       return err;
     });
 }
+
+// When the DOM is loaded
+document.addEventListener("DOMContentLoaded", function (event) {
+  document.getElementById("total").innerHTML = "Total weight: 0";
+
+  document.getElementById(add_pokemon).addEventListener("click", (event) => {
+    pokeName = document.getElementById(pokemon_input).value.trim();
+    insert_pokemon_element_with_template(pokeName, get_pokemon_card);
+  });
+});
