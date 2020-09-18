@@ -20,6 +20,7 @@ let get_pokemon_card = (name, weight, photo) => {
   spanWeight.className = "pokemon-weight";
   spanWeight.append(document.createTextNode(weight));
 
+  cardBody.append(cardTitle);
   cardBody.append(document.createTextNode("Weight: "));
   cardBody.append(spanWeight);
 
@@ -31,7 +32,7 @@ let get_pokemon_card = (name, weight, photo) => {
   // Create the card and put everything inside
   let card = document.createElement("div");
   card.className = "card";
-  card.style = "width: 18rem;";
+  card.style = "width: 18rem; margin-bottom: 1em;";
   card.append(image);
   card.append(cardBody);
   card.append(button);
@@ -40,7 +41,7 @@ let get_pokemon_card = (name, weight, photo) => {
 };
 
 function insert_pokemon_element_with_template(pokemonName, template_function) {
-  let ajax_promise = new Promise((resolve, reject) => {
+  let pokemon_ajax_promise = new Promise((resolve, reject) => {
     let req = new XMLHttpRequest();
     req.open("GET", `https://pokeapi.co/api/v2/pokemon/${pokemonName}`, true);
     // Gets executed when readyState changes even if it is not a 4 state
@@ -68,7 +69,7 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
     return result;
   };
 
-  ajax_promise.then(promise_thenable).catch((err) => {
+  pokemon_ajax_promise.then(promise_thenable).catch((err) => {
     return err;
   });
 }
