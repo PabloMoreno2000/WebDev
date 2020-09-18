@@ -92,9 +92,9 @@ function show_timed_alert(isSuccess, duration) {
   let alarm_id = "alarm";
 
   if (isSuccess) {
-    alarm = `<div id="${alarm_id}" class="alert alert-success" role="alert"> <strong>Bien!</strong> Pokemon agregado.</div>`;
+    alarm = `<div id="${alarm_id}" class="alert alert-success" role="alert"> <strong>Good!</strong> Pokemon added.</div>`;
   } else {
-    alarm = `<div id="${alarm_id}" class="alert alert-warning" role="alert"> <strong>Oh no...</strong> Ese pokemon no existe, intenta con otro.</div>`;
+    alarm = `<div id="${alarm_id}" class="alert alert-warning" role="alert"> <strong>Oh no...</strong> That pokemon doesn't exist, try with other name.</div>`;
   }
 
   alarm_div.insertAdjacentHTML("beforeend", alarm);
