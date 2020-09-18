@@ -1,6 +1,8 @@
 const pokemon_list = "item_list";
 const add_pokemon = "add-pokemon";
 const pokemon_input = "pokemon-input";
+let total_weight = 0;
+let pokemon_count = 0;
 
 let get_pokemon_promise = (pokemonName) => {
   return new Promise((resolve, reject) => {
@@ -62,9 +64,24 @@ let get_pokemon_card = (name, weight, photo) => {
   card.append(cardBody);
 
   button.addEventListener("click", (event) => {
+    // Remove weight and card when deleted
+    total_weight -= weight;
     document.getElementById(pokemon_list).removeChild(card);
+    document.getElementById(
+      "total"
+    ).innerHTML = `Total weight: ${total_weight}`;
+
+    pokemon_count--;
+    // If there are no pokemons left, hide the pokemons title of the list
+    if (pokemon_count == 0) {
+      document.getElementById(pokemon_list).style.visibility = "hidden";
+    }
   });
   card.append(button);
+
+  // Add the weight of the pokemon to the sum
+  total_weight += weight;
+  document.getElementById("total").innerHTML = `Total weight: ${total_weight}`;
 
   return card;
 };
@@ -77,6 +94,7 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
     let sprite = result.sprites.front_default;
     let cardNode = template_function(pokemonName, weight, sprite);
     document.getElementById(pokemon_list).append(cardNode);
+    pokemon_count++;
     return result;
   };
 
