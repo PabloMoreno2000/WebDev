@@ -92,9 +92,9 @@ function show_timed_alert(isSuccess, duration) {
   let alarm_id = "alarm";
 
   if (isSuccess) {
-    alarm = `<div id="${alarm_id}" class="alert alert-success" role="alert"> <strong>Bien!</strong> Pokemon agregado</div>`;
+    alarm = `<div id="${alarm_id}" class="alert alert-success" role="alert"> <strong>Bien!</strong> Pokemon agregado.</div>`;
   } else {
-    alarm = `<div id="${alarm_id}" class="alert alert-warning" role="alert"> Favor de checar el nombre del pokemon e intentar de nuevo</div>`;
+    alarm = `<div id="${alarm_id}" class="alert alert-warning" role="alert"> <strong>Oh no...</strong> Ese pokemon no existe, intenta con otro.</div>`;
   }
 
   alarm_div.insertAdjacentHTML("beforeend", alarm);
@@ -121,7 +121,7 @@ function insert_pokemon_element_with_template(pokemonName, template_function) {
   get_pokemon_promise(pokemonName)
     .then(promise_thenable)
     .catch((err) => {
-      show_timed_alert(false, 1500);
+      show_timed_alert(false, 3000);
       return err;
     });
 }
