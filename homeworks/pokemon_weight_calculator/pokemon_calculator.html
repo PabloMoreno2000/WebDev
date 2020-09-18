@@ -13,18 +13,29 @@
     <script src="./pokemon_calculator.js"></script>
   </head>
   <body>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">@</span>
+    <div
+      class="d-flex justify-content-center container"
+      style="
+        flex-direction: column;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        max-width: 500px;
+      "
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">@</span>
+        </div>
+        <input
+          id="pokemon-input"
+          type="text"
+          class="form-control"
+          placeholder="Pokemon name"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
       </div>
-      <input
-        id="pokemon-input"
-        type="text"
-        class="form-control"
-        placeholder="Pokemon name"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
+      <button type="button" class="btn btn-info">Click to add Pokemon!</button>
     </div>
 
     <div class="d-flex justify-content-center text-center">
