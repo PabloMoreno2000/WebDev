@@ -60,6 +60,10 @@ let get_pokemon_card = (name, weight, photo) => {
   card.style = "width: 18rem; margin-bottom: 1em;";
   card.append(image);
   card.append(cardBody);
+
+  button.addEventListener("click", (event) => {
+    document.getElementById(pokemon_list).removeChild(card);
+  });
   card.append(button);
 
   return card;
