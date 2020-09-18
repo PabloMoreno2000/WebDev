@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      console.log(axios);
+      axios
+        .put(
+          "http://localhost:3000/user/11/data?filter=test&more_args=141234123",
+          {
+            param1: "some data",
+          },
+          {
+            headers: {
+              Authorization: "my-token",
+            },
+          }
+        )
+        .then((response) => {
+          document.querySelector(".respose").innerHTML = JSON.stringify(
+            response
+          );
+          debugger;
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      let delete_all_cookies = () => {
+        document.cookie.split(";").forEach((cookie) => {
+          let cookie_data = cookie.split("=");
+          document.cookie =
+            cookie_data[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="respose"></div>
+  </body>
+</html>
