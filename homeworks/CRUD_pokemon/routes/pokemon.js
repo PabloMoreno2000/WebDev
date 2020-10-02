@@ -5,14 +5,11 @@ const { check, validationResult } = require("express-validator/check");
 const cardTypes = ["pokemon", "item", "price", "element"];
 const cards = {};
 // Assign each card type as an empty arrayto the object of cards
-cardTypes.map((cardType) => {
-  cards[cardType] = [];
-});
-let idCounter = 0;
-
-function isType(type) {
-  return cardTypes.includes(type);
-}
+//cardTypes.map((cardType) => {
+//cards[cardType] = [];
+//});
+// This is an id counter
+let id = 0;
 
 // @route
 // @desct
@@ -34,8 +31,20 @@ router.post(
     // Let's extract and then create the object to avoid saving undesired parameters
     const { name, desct, type } = req.body;
     // Remember this is the same as {"name": name, "desct": desct...}
-    cards[type].push({ name, desct, type });
+    cards[id] = { id, name, desct, type };
+    // Increase counter for next card
+    id++;
   }
 );
+
+router.get("/get/:id", (req, res) => {
+  let idRequested = req.params.id;
+  let card = cards[idRequested];
+  if (card) {
+    res.json(card);
+  } else {
+    return res.status(404).json({ msg: "Card not found" });
+  }
+});
 
 module.exports = router;
