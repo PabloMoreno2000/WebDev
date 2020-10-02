@@ -79,4 +79,15 @@ router.put(
   }
 );
 
+router.delete("/delete/:id", (req, res) => {
+  let idRequested = req.params.id;
+  let card = cards[idRequested];
+  if (card) {
+    delete cards[idRequested];
+    res.json({ msg: "Card successfully deleted" });
+  } else {
+    return res.status(404).json({ msg: "Card not found" });
+  }
+});
+
 module.exports = router;
