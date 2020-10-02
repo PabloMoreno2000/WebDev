@@ -47,4 +47,8 @@ router.get("/get/:id", (req, res) => {
   }
 });
 
+router.get("/getAll", (req, res) => {
+  res.json(cards);
+});
+
 module.exports = router;
