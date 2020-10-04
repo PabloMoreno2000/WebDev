@@ -105,15 +105,19 @@ router.put(
     }
 
     const { name, desct, type } = req.body;
-    // Check there's no other card with the same name
+    let idRequested = req.params.id;
+    let card = cards[idRequested];
+
+    // Check there's no other card with the same name that's not the one being updated
     for (let key in cards) {
-      if (cards.hasOwnProperty(key) && cards[key].name == name) {
+      if (
+        cards.hasOwnProperty(key) &&
+        cards[key].name == name &&
+        key != idRequested
+      ) {
         return res.status(400).json({ msg: "Card name already exists" });
       }
     }
-
-    let idRequested = req.params.id;
-    let card = cards[idRequested];
 
     if (card) {
       cards[idRequested] = { idRequested, name, desct, type };
