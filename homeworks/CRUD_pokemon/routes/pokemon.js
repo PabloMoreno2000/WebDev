@@ -5,10 +5,6 @@ const { check, validationResult } = require("express-validator");
 
 const cardTypes = ["pokemon", "item", "price", "element"];
 const cards = {};
-// Assign each card type as an empty arrayto the object of cards
-//cardTypes.map((cardType) => {
-//cards[cardType] = [];
-//});
 // This is an id counter
 let id = 0;
 
