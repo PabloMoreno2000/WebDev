@@ -17,7 +17,7 @@ router.post(
   "/create",
   [
     check("name", "Please insert a name for the card").exists(),
-    check("type", "Please insert a type for this card").isIn(cardTypes),
+    check("type", "Please insert a valid type for this card").isIn(cardTypes),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -38,9 +38,8 @@ router.post(
     }
 
     // Check there's no other card with the same name
-    for (let i = 0; i < cards.length; i++) {
-      let card = cards[i];
-      if (card.name == name) {
+    for (let key in cards) {
+      if (cards.hasOwnProperty(key) && cards[key].name == name) {
         return res.status(400).json({ msg: "Card name already exists" });
       }
     }
@@ -52,6 +51,12 @@ router.post(
         // Some pokemons have hundreds of moves, each with a lot of info, let's keep just some of them
         let movesCount = Math.min(3, resp.data.moves.length);
         resp.data.moves = resp.data.moves.slice(0, movesCount);
+        // game indices are not needed here
+        delete resp.data.game_indices;
+        // Won't use these sprites
+        if (resp.data.sprites.versions) {
+          delete resp.data.sprites.versions;
+        }
         desct = resp.data;
       } catch (error) {
         return res.status(400).json({ msg: "Invalid pokemon name" });
@@ -100,6 +105,13 @@ router.put(
     }
 
     const { name, desct, type } = req.body;
+    // Check there's no other card with the same name
+    for (let key in cards) {
+      if (cards.hasOwnProperty(key) && cards[key].name == name) {
+        return res.status(400).json({ msg: "Card name already exists" });
+      }
+    }
+
     let idRequested = req.params.id;
     let card = cards[idRequested];
 
