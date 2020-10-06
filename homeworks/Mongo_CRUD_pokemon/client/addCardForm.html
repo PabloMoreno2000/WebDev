@@ -46,10 +46,13 @@
           };
           if (data.type != "pokemon") {
             data.desct = document.getElementById(desctInput).value;
+          } else {
+            // Trim and put in lowercase pokemon names
+            data.name = data.name.trim().toLowerCase();
           }
           console.log(data);
           $.ajax({
-            url: "http://localhost:5151/create",
+            url: "http://localhost:5152/create",
             type: "POST",
             headers: {
               "Content-Type": "application/json",
