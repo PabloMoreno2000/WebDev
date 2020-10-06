@@ -19,7 +19,45 @@
     <!-- jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-      $(document).ready(function () {});
+      $(document).ready(function () {
+        const typeSelect = "card-type-select";
+        const nameInput = "card-name";
+        const desctInput = "card-description";
+        // Returns jQuery selector by id
+        const byId = (id) => {
+          return $(`#${id}`);
+        };
+
+        // Pokemon card's description is given by external api
+        byId(typeSelect).on("change", function (event) {
+          const value = event.target.value;
+          if (value == "pokemon") {
+            document.getElementById(desctInput).value = "";
+            document.getElementById(desctInput).setAttribute("readonly", "");
+          } else {
+            document.getElementById(desctInput).removeAttribute("readonly");
+          }
+        });
+
+        byId("add-card").on("click", function (event) {
+          let data = {
+            name: document.getElementById(nameInput).value,
+            type: document.getElementById(typeSelect).value,
+          };
+          if (data.type != "pokemon") {
+            data.desct = document.getElementById(desctInput).value;
+          }
+          console.log(data);
+          $.ajax({
+            url: "http://localhost:5151/create",
+            type: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: JSON.stringify(data),
+          });
+        });
+      });
     </script>
     <title>Add card form</title>
   </head>
@@ -36,7 +74,7 @@
       <h3>Form to add a new card</h3>
 
       <div class="input-group mb-3">
-        <select class="custom-select" id="inputGroupSelect03">
+        <select class="custom-select" id="card-type-select">
           <option selected>Card type...</option>
           <option value="pokemon">Pokemon</option>
           <option value="item">Item</option>
@@ -50,6 +88,7 @@
           <span class="input-group-text" id="basic-addon1"></span>
         </div>
         <input
+          id="card-name"
           type="text"
           class="form-control"
           placeholder="Card name"
@@ -63,6 +102,7 @@
           <span class="input-group-text" id="basic-addon1"></span>
         </div>
         <input
+          id="card-description"
           type="text"
           class="form-control"
           placeholder="Card description"
@@ -71,7 +111,12 @@
         />
       </div>
       <div class="text-center">
-        <button type="button" class="btn btn-success" style="width: 70%">
+        <button
+          id="add-card"
+          type="button"
+          class="btn btn-success"
+          style="width: 70%"
+        >
           Add card!
         </button>
       </div>
