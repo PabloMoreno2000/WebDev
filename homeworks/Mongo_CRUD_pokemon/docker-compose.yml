@@ -1,0 +1,17 @@
+version: "3"
+services:
+  results-db:
+    image: mongo:4.0
+    volumes:
+      - ./data:/data/db
+      - ./mongo_init.js:/docker-entrypoint-initdb.d/mongo_init.js
+    env_file:
+      - ./mongo_common.env
+    ports:
+      - "27017:27017"
+    command: mongod --wiredTigerCacheSizeGB 2.0
+    networks:
+      booker-network:
+
+networks:
+  booker-network:
