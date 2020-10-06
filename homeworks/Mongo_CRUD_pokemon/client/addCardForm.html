@@ -44,6 +44,11 @@
             name: document.getElementById(nameInput).value,
             type: document.getElementById(typeSelect).value,
           };
+          if (data.type == "Card type...") {
+            alert("Please choose a card type");
+            return;
+          }
+
           if (data.type != "pokemon") {
             data.desct = document.getElementById(desctInput).value;
           } else {
@@ -58,6 +63,12 @@
               "Content-Type": "application/json",
             },
             data: JSON.stringify(data),
+            success: function (_) {
+              alert("Card successfully added");
+            },
+            error: function (resp) {
+              alert(resp.responseJSON.msg);
+            },
           });
         });
       });
