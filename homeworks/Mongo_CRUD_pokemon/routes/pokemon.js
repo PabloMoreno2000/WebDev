@@ -69,9 +69,8 @@ router.post(
 );
 
 // @desct Returns a card by its id
-router.get("/get/:id", (req, res) => {
-  let idRequested = req.params.id;
-  let card = cards[idRequested];
+router.get("/get/:id", async (req, res) => {
+  let card = await Card.findById(req.params.id);
   if (card) {
     res.json(card);
   } else {
@@ -80,7 +79,8 @@ router.get("/get/:id", (req, res) => {
 });
 
 // @desct Returns all cards within the server
-router.get("/getAll", (req, res) => {
+router.get("/getAll", async (req, res) => {
+  const cards = await Card.find();
   res.json(cards);
 });
 
