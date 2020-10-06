@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const Card = require("../models/Card");
 
 const cardTypes = ["pokemon", "item", "price", "element"];
 const cards = {};
@@ -34,10 +35,9 @@ router.post(
     }
 
     // Check there's no other card with the same name
-    for (let key in cards) {
-      if (cards.hasOwnProperty(key) && cards[key].name == name) {
-        return res.status(400).json({ msg: "Card name already exists" });
-      }
+    let card = await Card.findOne({ name });
+    if (card) {
+      return res.status(400).json({ msg: "Card name already exists" });
     }
 
     // The description of a pokemon card is the pokemon itself
@@ -53,18 +53,18 @@ router.post(
         if (resp.data.sprites.versions) {
           delete resp.data.sprites.versions;
         }
-        desct = resp.data;
+        // Stringify the json to fit the mongoose schema
+        desct = JSON.stringify(resp.data);
       } catch (error) {
         return res.status(400).json({ msg: "Invalid pokemon name" });
       }
     }
 
     // Remember this is the same as {"name": name, "desct": desct...}
-    cards[id] = { id, name, desct, type };
+    card = new Card({ name, desct, type });
+    await card.save();
     // Return the card
-    res.json(cards[id]);
-    // Increase counter for next card
-    id++;
+    res.json(card);
   }
 );
 
