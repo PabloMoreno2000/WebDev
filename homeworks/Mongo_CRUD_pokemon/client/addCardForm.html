@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- Semantic UI-->
+    <link rel="stylesheet" href="./semantic.min.css" />
+    <script src="semantic.min.js"></script>
+
+    <title>Add card form</title>
+  </head>
+  <body>
+    <div class="d-flex container justify-content-center"
+    style="flex-direction: column;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    max-width: 500px;
+  ">
+      <h3>Form to add a new card</h3>
+
+      <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect03">
+          <option selected>Card type...</option>
+          <option value="pokemon">Pokemon</option>
+          <option value="item">Item</option>
+          <option value="price">Price</option>
+          <option value="element">Element</option>
+        </select>
+      </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"></span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Card name"
+            aria-label="Name"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"></span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Card description"
+            aria-label="Desct"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
